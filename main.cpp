@@ -10,14 +10,14 @@
 #include <vector>
 
 int minimumLigas(int amount, const std::vector<int>& availableSizes) {
-    std::vector<int> dp(amount + 1, INT_MAX); // Vetor de memoizaÁ„o
-    dp[0] = 0; // Caso base: n„o È necess·rio nenhuma liga para demanda zero
+    std::vector<int> dp(amount + 1, amount + 1); // Vetor de memoiza√ß√£o
+    dp[0] = 0; // Caso base: n√£o √© necess√°rio nenhuma liga para demanda zero
 
     for (int i = 1; i <= amount; i++) {
-        for (int j = 0; j < availableSizes.size(); j++) {
+        for (std::size_t j = 0; j < availableSizes.size(); j++) {
             if (availableSizes[j] <= i) {
                 int subproblema = dp[i - availableSizes[j]];
-                if (subproblema != INT_MAX && subproblema + 1 < dp[i]) {
+                if (subproblema != (amount + 1) && subproblema + 1 < dp[i]) {
                     dp[i] = subproblema + 1;
                 }
             }
